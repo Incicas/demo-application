@@ -5,11 +5,10 @@ import com.example.demoapplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -26,5 +25,15 @@ public class UserController {
     public ResponseEntity<List<UserEntity>> getUsers(){
         List<UserEntity> users =  this.userService.getUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+    @GetMapping("/{userId}")
+    public ResponseEntity<Optional<UserEntity>> getUserById(@PathVariable Long userId){
+        Optional<UserEntity> user = userService.getUserById(userId);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+    @PostMapping
+    public ResponseEntity<UserEntity> addUser(@RequestBody UserEntity userEntity){
+        UserEntity user = userService.addUser(userEntity);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 }
