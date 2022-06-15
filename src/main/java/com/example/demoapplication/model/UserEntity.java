@@ -1,4 +1,4 @@
-package com.example.demoapplication;
+package com.example.demoapplication.model;
 
 
 import com.fasterxml.jackson.databind.ser.std.TimeZoneSerializer;
